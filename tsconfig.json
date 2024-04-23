@@ -2,10 +2,25 @@
 	"compilerOptions": {
 	  "outDir": "./dist/",
 	  "noImplicitAny": true,
-	  "module": "es6",
+	  "module": "ESNext",
 	  "target": "es5",
 	  "jsx": "react",
 	  "allowJs": true,
-	  "moduleResolution": "node"
+	  "moduleResolution": "node",
+
+	  // When set to true, allowSyntheticDefaultImports allows you to write an import like:  import React from "react";
+	  // instead of:  import * as React from "react";
+	  "allowSyntheticDefaultImports": true,
+
+	  // Problem occurs when we want to import CommonJS module into ES6 module codebase.
+	  // Before these flags we had to import CommonJS modules with star (* as something) import: import * as moment from 'moment'
+	  // With flag esModuleInterop we can import CommonJS modules in compliance with es6 modules spec. Now our import code looks like this:
+	  // import moment from 'moment'
+      "esModuleInterop": true
+	},
+	"ts-node": {
+		"compilerOptions": {
+		  "module": "CommonJS"
+		}
 	}
   }
