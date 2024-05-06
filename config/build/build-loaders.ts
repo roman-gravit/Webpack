@@ -4,6 +4,7 @@ import MinCssExtractPlugin from "mini-css-extract-plugin";
 import ReactRefreshTypeScript from "react-refresh-typescript";
 
 import { BuildOptions } from "./types/types";
+import { buildBabelLoader } from "./babel/buildBabelLoader";
 
 export function BuildLoaders(options: BuildOptions): ModuleOptions["rules"] {
 	const isDevMode = options.mode === "development";
@@ -23,6 +24,9 @@ export function BuildLoaders(options: BuildOptions): ModuleOptions["rules"] {
 			"sass-loader"
 		],
 	};
+
+
+	const babelLoader = buildBabelLoader(options);
 
 	const tsLoader = {
 		test: /\.tsx?$/,
@@ -72,6 +76,7 @@ export function BuildLoaders(options: BuildOptions): ModuleOptions["rules"] {
 		assetLoader,
 		svgLoader,
 		scssLoader,
-		tsLoader
+		babelLoader
+		//tsLoader
 	]
 }

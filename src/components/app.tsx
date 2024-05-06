@@ -27,8 +27,8 @@ export const App = () => {
 */
 
 	return (
-		<div>
-			<h1>Platform4={_PLATFORM }</h1>
+		<div data-testid={"App"}>
+			<h1>Platform6={_PLATFORM }</h1>
 			<div>PNG: <img width={50} height={50} src={AvatarPng}></img></div>
 			<div>SVGloader64: <AvatarSvg  width={64} height ={64} /></div>
 			<div>SVGloader32: <ArrowSvg className={classes.arrow} width={32} fill={"red"} height ={32} /></div>
