@@ -13,17 +13,22 @@ export const App = () => {
 	
 	const increment = () => setCounter(count+1);
 
-	if(_PLATFORM === "desktop") {
+/*	if (_PLATFORM === "desktop") {
+		function _test(value: string): void {
+			console.log(value);
+		}
+		_test("12");
 		return <div>DESKTOP PLATFORM</div>
 	}
 
-	if(_PLATFORM === "mobile") {
+	if (_PLATFORM === "mobile") {
 		return <div>MOBILE PLATFORM</div>
 	}
+*/
 
 	return (
 		<div>
-			<h1>Platform={_PLATFORM }</h1>
+			<h1>Platform4={_PLATFORM }</h1>
 			<div>PNG: <img width={50} height={50} src={AvatarPng}></img></div>
 			<div>SVGloader64: <AvatarSvg  width={64} height ={64} /></div>
 			<div>SVGloader32: <ArrowSvg className={classes.arrow} width={32} fill={"red"} height ={32} /></div>

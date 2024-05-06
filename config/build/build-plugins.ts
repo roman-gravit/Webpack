@@ -1,10 +1,13 @@
-import webpack, { DefinePlugin } from 'webpack';
-import { Configuration } from "webpack";
+import webpack, { DefinePlugin, Configuration } from 'webpack';
+
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MinCssExtractPlugin from "mini-css-extract-plugin";
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
+import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
+
 import { BuildOptions } from "./types/types";
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import { platform } from 'os';
+
 
 export function BuildPlugins(options: BuildOptions): Configuration["plugins"] {
 
@@ -21,7 +24,10 @@ export function BuildPlugins(options: BuildOptions): Configuration["plugins"] {
 		// This can be useful for allowing different behavior between development builds and production builds.
 		new DefinePlugin({
 			_PLATFORM: JSON.stringify(options.platform)
-		 })
+		}),
+
+		// Webpack plugin that runs TypeScript type checker on a separate process.
+		new ForkTsCheckerWebpackPlugin()
 	];
 
 	if(isDevMode) {
@@ -32,6 +38,8 @@ export function BuildPlugins(options: BuildOptions): Configuration["plugins"] {
 			filename: "css/[name][contenthash].css",
 			chunkFilename: "css/[name][contenthash].css",
   		}));
+
+		plugins.push(new ReactRefreshWebpackPlugin())
 		
 	}
 
