@@ -51,11 +51,12 @@ export function BuildPlugins(options: BuildOptions): Configuration["plugins"] {
 			chunkFilename: "css/[name][contenthash].css",
   		}));
 
-		  plugins.push(new CopyPlugin({
+		// Copies individual files or entire directories, which already exist, to the build directory.
+		plugins.push(new CopyPlugin({
 			patterns: [
-			  { from: path.resolve(options.paths.public, "locales"), to: path.resolve(options.paths.output, "locales") },
+				{ from: path.resolve(options.paths.public, "locales"), to: path.resolve(options.paths.output, "locales") },
 			],
-		  }));
+		}));
 	}
 
 	if(options.analzer) {
