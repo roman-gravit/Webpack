@@ -3,6 +3,7 @@ import { Configuration } from "webpack";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MinCssExtractPlugin from "mini-css-extract-plugin";
 import { BuildOptions } from "./types/types";
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 export function BuildPlugins(options: BuildOptions): Configuration["plugins"] {
 
@@ -24,6 +25,7 @@ export function BuildPlugins(options: BuildOptions): Configuration["plugins"] {
 			filename: "css/[name][contenthash].css",
 			chunkFilename: "css/[name][contenthash].css",
   		}));
+		
 	}
 
 	if(isProdMode) {
@@ -31,6 +33,10 @@ export function BuildPlugins(options: BuildOptions): Configuration["plugins"] {
 			filename: "css/[name][contenthash].css",
 			chunkFilename: "css/[name][contenthash].css",
   		}));
+	}
+
+	if(options.analzer) {
+		plugins.push(new BundleAnalyzerPlugin());
 	}
 
 	return plugins;
