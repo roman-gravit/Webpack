@@ -25,9 +25,6 @@ export function BuildWebpack(options: BuildOptions): webpack.Configuration {
 			clean: true
 		},
 
-		// Add additional plugins to the compiler.
-		plugins: BuildPlugins(options),
-
 		// Options affecting the normal modules (`NormalModuleFactory`).
 		module: {
 			rules: BuildLoaders(options),
@@ -36,9 +33,17 @@ export function BuildWebpack(options: BuildOptions): webpack.Configuration {
 		resolve: BuildResolver(options),
 
 		// developer tool to enhance debugging (false | eval | [inline-|hidden-|eval-][nosources-][cheap-[module-]]source-map).
-		devtool: isDevMode 
-					? "inline-source-map" 
-					: false,
+		//devtool: isDevMode 
+		//			? "inline-source-map" 
+		//			: "source-map",
+
+		// SourceMapDevToolPlugin
+		// This plugin enables more fine grained control of source map generation. 
+		// It is also enabled automatically by certain settings of the devtool configuration option.
+		devtool: false,
+
+		// Add additional plugins to the compiler.
+		plugins: BuildPlugins(options),
 
 		// Can be used to configure the behaviour of webpack-dev-server when
 		// the webpack config is passed to webpack-dev-server CLI.

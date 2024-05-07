@@ -7,11 +7,22 @@ import AvatarPng from "@/assets/avatar.png";
 import AvatarSvg from "@/assets/avatar.svg";
 import ArrowSvg from "@/assets/arrow.svg";
 
+function TODO() {
+	TODO2();
+}
+
+function TODO2() {
+	throw new Error("error!!!");
+}
+
 export const App = () => {
 
 	const [count, setCounter] = useState<number>(0);
 	
-	const increment = () => setCounter(count+1);
+	const increment = () => { 
+		TODO();
+		setCounter(count+1);
+	}
 
 /*	if (_PLATFORM === "desktop") {
 		function _test(value: string): void {

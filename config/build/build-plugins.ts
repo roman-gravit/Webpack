@@ -6,6 +6,7 @@ import MinCssExtractPlugin from "mini-css-extract-plugin";
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import CopyPlugin from "copy-webpack-plugin";
+import { SourceMapDevToolPlugin } from "webpack";
 
 import { BuildOptions } from "./types/types";
 import path from 'path';
@@ -15,6 +16,29 @@ export function BuildPlugins(options: BuildOptions): Configuration["plugins"] {
 
 	const isDevMode = options.mode === "development";
 	const isProdMode = options.mode === "production";
+
+
+	const devToolPluginOptions = {
+
+		// Indicates whether column mappings should be used.
+		columns: true,				
+		
+		// Prevents the source file content from being included in the source map.
+		//
+		// Production: include original source code into the source map files.
+		//             Takes more space, but allows to debug without source files.
+		//
+		// Debug: do not include original source code.
+		//        Takes less space, works faster, need original files to debug.
+		//
+		noSources: isDevMode ? false : true,
+
+		// Indicates whether loaders should generate source maps.
+		module: true,
+
+		namespace: "test"
+
+	};
 
 	// common for development and production
 	const plugins: Configuration["plugins"] = [
@@ -29,7 +53,9 @@ export function BuildPlugins(options: BuildOptions): Configuration["plugins"] {
 		}),
 
 		// Webpack plugin that runs TypeScript type checker on a separate process.
-		new ForkTsCheckerWebpackPlugin()
+		new ForkTsCheckerWebpackPlugin(),
+
+		new SourceMapDevToolPlugin(devToolPluginOptions)
 	];
 
 	if(isDevMode) {
